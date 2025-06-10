@@ -4,36 +4,36 @@ evaluator:
   type: CocoEvaluator
   iou_types: ['bbox', ]
 
-num_classes: 80
-remap_mscoco_category: True
+num_classes: 5 # your dataset classes
+remap_mscoco_category: False
 
-train_dataloader: 
+train_dataloader:
   type: DataLoader
-  dataset: 
+  dataset:
     type: CocoDetection
-    img_folder: /datassd/COCO/train2017/
-    ann_file: /datassd/COCO/annotations/instances_train2017.json
+    img_folder: /kaggle/input/coco-car-damage-detection-dataset/train
+    ann_file: /kaggle/input/coco-car-damage-detection-dataset/train/COCO_mul_train_annos.json
     return_masks: False
     transforms:
       type: Compose
       ops: ~
   shuffle: True
   num_workers: 4
-  drop_last: True 
+  drop_last: True
   collate_fn:
     type: BatchImageCollateFunction
 
 
 val_dataloader:
   type: DataLoader
-  dataset: 
+  dataset:
     type: CocoDetection
-    img_folder: /datassd/COCO/val2017/
-    ann_file: /datassd/COCO/annotations/instances_val2017.json
+    img_folder: /kaggle/input/coco-car-damage-detection-dataset/val
+    ann_file: /kaggle/input/coco-car-damage-detection-dataset/val/COCO_mul_val_annos.json
     return_masks: False
     transforms:
       type: Compose
-      ops: ~ 
+      ops: ~
   shuffle: False
   num_workers: 4
   drop_last: False

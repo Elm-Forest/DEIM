@@ -41,7 +41,7 @@ def setup_distributed(print_rank: int=0, print_method: str='builtin', seed: int=
         WORLD_SIZE = int(os.getenv('WORLD_SIZE', 1))
 
         # torch.distributed.init_process_group(backend=backend, init_method='env://')
-        torch.distributed.init_process_group(init_method='env://')
+        torch.distributed.init_process_group(backend='nccl',init_method='env://')
         torch.distributed.barrier()
 
         rank = torch.distributed.get_rank()
