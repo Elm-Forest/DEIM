@@ -4,22 +4,22 @@ evaluator:
   type: CocoEvaluator
   iou_types: ['bbox', ]
 
-num_classes: 2 # your dataset classes
+num_classes: 12 # your dataset classes
 remap_mscoco_category: False
 
 train_dataloader:
   type: DataLoader
   dataset:
-    type: VOCDetection
-    img_folder: /kaggle/input/cplid-insulator/Defective_Insulators/images
-    ann_file: /kaggle/input/cplid-insulator/Defective_Insulators/labels/defect
+    type: CocoDetection
+    img_folder: /kaggle/input/visdrone-2019-coco-format/train
+    ann_file: /kaggle/input/visdrone-2019-coco-format/annotations_VisDrone_train.json
     return_masks: False
     transforms:
       type: Compose
       ops: ~
   shuffle: True
+  total_batch_size: 16
   num_workers: 4
-  total_batch_size: 32
   drop_last: True
   collate_fn:
     type: BatchImageCollateFunction
@@ -28,9 +28,9 @@ train_dataloader:
 val_dataloader:
   type: DataLoader
   dataset:
-    type: VOCDetection
-    img_folder: /kaggle/input/cplid-insulator/Defective_Insulators/images
-    ann_file: /kaggle/input/cplid-insulator/Defective_Insulators/labels/defect
+    type: CocoDetection
+    img_folder: /kaggle/input/visdrone-2019-coco-format/val
+    ann_file: /kaggle/input/visdrone-2019-coco-format/annotations_VisDrone_val.json
     return_masks: False
     transforms:
       type: Compose
